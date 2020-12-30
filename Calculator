@@ -1,0 +1,54 @@
+import tkinter as tk
+from tkinter import ttk
+
+operations=["+","-","x","÷"]
+
+root=tk.Tk()
+root.title("Calculator")
+root.geometry("500x200")
+
+num1_text=tk.StringVar()
+entry1=tk.Entry(root,width=27,textvariable=num1_text)
+entry1.grid(row=1,column=1,padx=50)
+
+num2_text=tk.StringVar()
+entry2=tk.Entry(root,width=27,textvariable=num2_text)
+entry2.grid(row=1,column=2,padx=2)
+
+oper=tk.StringVar()
+oper_box=ttk.Combobox(root,width=27,textvariable=oper)
+oper_box.grid(rowspan=5,columnspan=30,pady=15,padx=50)
+oper_box['values']=operations
+
+lab=tk.Label(root,text="")
+lab.config(font=("Berlin Sans FB",22))
+lab.grid(rowspan=6,columnspan=30,pady=15,padx=50)
+
+def calculate():
+  num1_str=num1_text.get()
+  num2_str=num2_text.get()
+  op=oper.get()
+
+  num1=int(num1_str)
+  num2=int(num2_str)
+
+  if op == "+":
+    value=num1+num2
+    lab.config(text=(str(value)))
+  elif op == "-":
+    value=num1-num2
+    lab.config(text=(str(value)))
+  elif op == "x":
+    value=num1*num2
+    lab.config(text=(str(value)))
+  elif op == "÷":
+    value=num1/num2
+    lab.config(text=(str(value)))
+  else:
+    pass
+
+btn=tk.Button(root,text="Calculate",command=calculate)
+btn.config(font=("Calibri",18))
+btn.grid(rowspan=4,columnspan=10,pady=2)
+
+root.mainloop()
